@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Shop</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="topbar">
+        <h1 class="title-text">Welcome to The Shop</h1>
+      </div>
+      <hr>
+
+      <div class="top-products">
+        @{
+          int ProdCount = 1;
+
+          foreach (var product in ViewBag.Products) {
+            if (ProdCount <= 5) {
+              <div class="product2">
+                <img src="@product.Image" width="130px">
+                <h5 class="product_title">@product.Name</h5>
+                <h6 class="product-qty">(@product.Quantity left)</h6>
+              </div>
+            }
+            ProdCount++;
+          }
+        }
+        <br>
+        <a href="products" class="btn btn-default btn-sm btn-block">Show More...</a>
+      </div>
+      <hr>
+      <div class="recent-orders">
+        <h4>Recent Orders</h4>
+        @{
+          int OrderCount = 1;
+          foreach (var order in ViewBag.Orders) {
+
+            if (OrderCount <=5) {
+              <div class="order">
+              @{
+              DateTime date = @order.CreatedAt;
+              TimeAgo DateVal = new TimeAgo() {
+                Date = date
+              };
+              string ReturnTime = DateVal.TimeSince();
+              }              
+                <h5 class="order_title">@order.Customer.Name purchaced @order.Quantity <i>@order.Product.Name</i>... (@ReturnTime)</h5>
+              </div>
+            }
+            OrderCount++;
+          }
+        }
+        <a href="orders" class="btn btn-default btn-sm">Show More...</a>
+      </div>
+      <hr>
+
+      <div class="new-customers">
+        <h4>New Customers</h4>
+        @{
+          int CustCount = 1;
+          foreach (var person in ViewBag.Customers) {
+
+              if (CustCount <= 5) {
+                <div class="order">
+                @{
+                DateTime date = @person.CreatedAt;
+                TimeAgo DateVal = new TimeAgo() {
+                  Date = date
+                };
+                string ReturnTime = DateVal.TimeSince();
+                }
+                  <h5 class="order_title">@person.Name joined the store (@ReturnTime)</h5>
+                </div>
+              }
+              CustCount++;
+          }
+        }
+        <a href="customers" class="btn btn-default btn-sm">Show More...</a>
+      </div>
+      <br><br>     
+    </div>
+  </body>
+</html>

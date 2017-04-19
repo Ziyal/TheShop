@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Customers</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="topbar">
+        <h1 class="title-text">Customers</h1>
+
+        <div class="customer_form">
+            <form action="add-customer" method="post" class="form-inline">
+              <div class="form-group">
+                <label for="Name" class="form_titles">Name: </label><input type="text" name="Name" class="form-control" placeholder="Enter customer name">
+              </div>
+                <input type="submit" value="Add Customer" class="btn btn-info add_customer_btn">
+            </form>
+        </div>
+
+        <table class="table table-hover table-bordered" width="100%">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Date Added</th> 
+              <th>Action</th> 
+            </tr>
+          </thead>
+          <tbody>
+          @{
+            foreach(var entry in ViewBag.Customers){
+            <tr>
+              <td><a href="customer/@entry.CustomerId">@entry.Name</a></td> 
+              <td>@entry.CreatedAt.ToString("MMMM d, yyyy")</td>
+              <td style="text-align:center" width="20%"><a href="delete-customer/@entry.CustomerId"><button class="btn btn-warning btn-sm btn-block">DELETE</button></a></td> 
+            </tr>
+            }
+          }
+          </tbody>
+        </table>        
+
+    </div>
+  </body>
+</html>

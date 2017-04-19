@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Orders</title>
+  </head>
+  <body>
+    <div class="orders-container">
+        <h1 class="title-text">Place an Order</h1>
+        <div class="order_form">
+            <form action="add-order" method="post" class="form-inline">
+                <div class="form-group">
+                    <label class="form_titles">Name: </label>
+                    <select name="CustomerId" id="Customer" class="form-control">
+                        @{ foreach (var person in @ViewBag.Customers){
+                            <option value="@person.CustomerId">@person.Name</option>
+                        }
+                        }
+                    </select>                
+                </div>
+                <div class="form-group">
+                    <label class="form_titles">Product: </label>
+                    <select name="ProductsId" id="Product" class="form-control">
+                        @{ foreach (var item in @ViewBag.Items){
+                            <option value="@item.ProductsId">@item.Name</option>
+                        }
+                        }
+                    </select>    
+                </div>
+
+                <div class="form-group">
+                    <label class="form_titles">Quantity: </label>
+                    <select name="Quantity" id="ProductId" class="form-control">
+                        @{ for (int i = 1; i < 51; i++){
+                            <option value="@i">@i</option>
+                        }
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Order" class="btn btn-success">
+            </form>
+        </div>
+            <hr><br>
+            <h1 class="title-text">All Orders</h1>
+            <div class="test">@ViewBag.Error</div>
+        <table class="table table-hover table-bordered" width="100%">
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Product</th> 
+              <th>Quantity</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          @{
+            foreach(var entry in ViewBag.Orders){
+            <tr>
+              <td>@entry.Customer.Name</td> 
+              <td>@entry.Product.Name</td>
+              <td>@entry.Quantity</td>
+              <td>@entry.CreatedAt.ToString("MMMM d, yyyy")</td>
+            </tr>
+            }
+          }
+          </tbody>
+        </table>   
+      <hr>
+    </div>
+  </body>
+</html>
