@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using TheShop.Models;
 using MySQL.Data.EntityFrameworkCore.Extensions;
-using Stripe;
 
 namespace TheShop
 {
@@ -24,7 +23,6 @@ namespace TheShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
             loggerFactory.AddConsole();
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
